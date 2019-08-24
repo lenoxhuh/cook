@@ -1,0 +1,11 @@
+.video-wrapper {
+    width: 100vw;
+    height: 500px;
+    padding-top: 30px;
+}
+
+.react-player {
+    filter: grayscale(100%) contrast(1);
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+}

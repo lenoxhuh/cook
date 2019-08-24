@@ -1,0 +1,45 @@
+.country-bg img {
+    width: 100vw;
+    height: auto;
+}
+
+.country-bg {
+    padding: 40px 0;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    z-index: -1;
+}
+
+.profile-header {
+    padding: 40px 40px;
+}
+
+.profile-desc {
+    padding: 10px 0;
+}
+
+.user-wrapper h1 {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;    
+}
+
+.user-wrapper h3 {
+    margin: 0;
+}
+
+.profile-row {
+    line-height: 1.25em;
+}
+
+.user-pic {
+    position: absolute;
+    top: 440px;
+    background-color: white;
+}
+
+.articles {
+    width: 50%;
+    min-width: 300px;
+    margin: 0 auto;
+}

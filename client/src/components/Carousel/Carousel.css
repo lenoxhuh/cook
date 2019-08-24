@@ -1,0 +1,14 @@
+.cards-container {
+		width: calc(80vw - 80px);
+		min-width: 600px;
+		margin: 0 auto;
+		margin-bottom: 100px;
+		height: 500px;
+    padding: 40px 0;
+    text-align: left !important;
+}
+
+.carousel-info {
+	text-align: center;
+	margin-bottom: 30px !important;
+}

@@ -1,0 +1,33 @@
+.country-bg img {
+    width: 100vw;
+    height: auto;
+    position: relative;
+    top: -50%;
+}
+
+.country-bg {
+    margin: 40px 0;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    z-index: -1;
+}
+
+.country-header {
+    padding: 20px 40px;
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    width: 50%;
+    min-width: 300px;
+    text-align: center;
+    margin: 40px auto;
+}
+
+.country-header h1 {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+p {
+    opacity: 0.7;
+}

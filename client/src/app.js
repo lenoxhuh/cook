@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
+import Navbar from './components/Navbar/index';
+import Home from './components/Home/index';
 
-// import Home from './components/Home/index';
 // import { NewUser, LoginUser } from './components/Auth/index';
 
 // const User = ({ match }) => (
@@ -30,14 +31,13 @@ class App extends Component {
      return body;
   };
 
+  // <Route exact path="/auth/login" component={LoginUser} />
   render() {
     return (
       <Router>
         <div>
           <Navbar />
-          // <Route exact path="/" component={} />
-          // <Route exact path="/auth/register" component={NewUser} />
-          // <Route exact path="/auth/login" component={LoginUser} />
+          <Route exact path="/" component={Home} />
         </div>
       </Router>
     );

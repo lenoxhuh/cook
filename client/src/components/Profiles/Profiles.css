@@ -1,0 +1,101 @@
+h2 {
+    font-family: "fira sans";
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+.profiles-container {
+	width: calc(80vw - 80px);
+	margin: 0 auto;
+}
+
+.profiles-header {
+    padding: 40px 0;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    border: 1px #EEE solid;
+    display: inline-block;
+}
+
+.profile-wrapper {
+    width: 20em;
+    min-width: 250px;
+    height: 430px;
+    border: 2px solid #EEE;
+    margin: 0 50px;
+    padding: 0px 40px;
+    padding-top: 40px;
+    display: inline-block; 
+    text-align: left;
+    vertical-align: top;
+    position: relative;
+}
+
+.card-link {
+    position: absolute;
+    bottom: 20px;
+}
+
+.profile-wrapper:first-child {
+    margin-left: 90px;
+}
+
+.profile-wrapper:last-child {
+    margin-right: 90px;
+}
+
+.profile-name {
+    font-family: "fira sans";
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.profile-pic {
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+		overflow: hidden;
+}
+
+.profile-pic img {
+    width: 20%;
+		min-width: 200px;
+    height: auto;
+    position: relative;
+    top: 50%;
+		left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.profile-desc {
+    text-align: left;
+    opacity: 0.6;
+    line-height: 1.25em;
+    white-space: pre-wrap !important;
+}
+
+.profile-link {
+    font-family: "fira sans";
+    color: #48acf0;
+    text-decoration: none;
+    text-align: left;
+}
+
+.profiles-wrapper {
+    margin: 0 auto;
+		height: 40em !important;
+		text-align: left !important;
+		width: calc(80vw - 80px);
+    padding-bottom: 40px;
+}

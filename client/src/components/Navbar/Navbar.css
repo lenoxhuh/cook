@@ -1,0 +1,122 @@
+.title h1 {
+    font-family: "Unica One";
+    font-size: 26px;
+    text-align: left;
+    padding: 5px 20px;
+}
+
+.title small {
+    font-family: "Fira Sans";
+    font-size: 18px !important;
+    font-weight: 200;
+    color: #565554;
+    font-size: 26px;
+    font-weight: 200;
+}
+
+.nav-wrapper {
+    padding: 0px 100px;
+    text-align: center;
+}
+
+.nav-logo {
+    color: black;
+    text-decoration: none;
+}
+
+.auth {
+  margin: 0 15px;
+}
+
+.auth-container {
+  position: relative;
+  top: -35px;
+  font-family: 'cabin';
+  font-size: 20px;
+  color: #565554;
+}
+
+.navbar-desc {
+  font-family: 'cabin';
+  font-size: 16px;
+  float: left;
+  position: relative;
+  top: -40px;
+  left: 22px;
+}
+
+.nav-link {
+    font-family: "Cabin";
+    text-decoration: none;
+    color: #565554;
+    display: inline-block;
+    vertical-align: top;
+    width: 10%;
+    opacity: 0.8;
+    transition: 0.5s;
+    text-align: center;
+    min-width: 150px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 10px;
+    color: #223037;
+    margin: 10px;
+}
+
+.nav-focus {
+  background-color: #223037;
+  color: white;
+  opacity: 1;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    background-color: #EEE;
+}
+
+.nav-focus:hover {
+  background-color: #223037;
+  color: white;
+  opacity: 1;
+}
+
+.search-wrapper {
+  float: right;
+  position: relative;
+  top: -50px;
+  right: 40px;
+}
+
+.search-wrapper input[type=text] {
+  font-family: "Cabin";
+  color: #565554;
+  transition: 0.5s;
+  min-width: 200px;
+  background-color: #EEE;
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: #223037;
+  outline: none;
+  border: none;
+  font-size: 14px;
+}
+
+.auth {
+    font-size: 16px !important;
+    float: right;
+    position: relative;
+    top: 10px;
+    cursor: pointer;
+}
+
+.auth a {
+    margin-right: 20px;
+}
+
+@media (max-width: 1110px) {
+    .nav-link {
+        width: 100%;
+        max-width: 50px;
+        border-right: none;
+    }
+}
