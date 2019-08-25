@@ -6,3 +6,23 @@
   text-align: center;
   box-shadow: 1px 2px 8px #555;
 }
+
+.meal-plan-bar {
+  width: 80%;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #bbb;
+  display: inline-block;
+  margin-bottom: 80px;
+}
+
+.meal-plan-bar:first-child {
+  margin-top: 60px;
+}
+
+.meal-plan-title {
+  font-size: 14px;
+  font-family: 'cabin';
+  position: relative;
+  top: -40px;
+}

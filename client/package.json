@@ -9,7 +9,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-scroll-horizontal": "^1.5.1",
-    "react-text-loop": "^1.1.0"
+    "react-text-loop": "^1.1.0",
+    "victory": "^33.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

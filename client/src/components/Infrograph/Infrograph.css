@@ -1,6 +1,7 @@
 .infrographic-wrapper {
   width: calc(100vw - 80px);
   margin: 0 auto;
+  margin-top: 40px;
 }
 
 .infrographic-wrapper h1 {
@@ -33,4 +34,39 @@
   margin: 0;
   min-width: 400px;
   width: 60%;
+}
+
+.infrograph {
+  padding: 40px;
+}
+
+.module-wrapper {
+  background-color: #eee;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.module-wrapper-wrapper {
+  width: 400px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 20px;
+}
+
+.infromodules-wrapper {
+  padding: 40px 0px; 
+  position: relative;
+}
+
+.module-description {
+  padding: 5px 10px;
+  background-color: #223037;
+  border-radius: 20px;
+  color: white;
+  display: inline-block;
+  position: absolute;
+  top: 50px;
+  float: right;
+  box-shadow: 1px 2px 8px #555;
+  font-size: 12px;
 }
