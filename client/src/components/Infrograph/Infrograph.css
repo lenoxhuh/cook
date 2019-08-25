@@ -1,0 +1,36 @@
+.infrographic-wrapper {
+  width: calc(100vw - 80px);
+  margin: 0 auto;
+}
+
+.infrographic-wrapper h1 {
+  padding-bottom: 4px;
+}
+
+.text-shadow {
+  text-shadow: -2px -2px white;
+  text-shadow: -2px 2px white;
+  text-shadow: 2px -2px white;
+  text-shadow: 2px 2px white;
+}
+
+.abstract {
+  font-style: italics;
+  margin-bottom: 0;
+  position: relative;
+  top: 10px;
+}
+
+.underline {
+  background-size: 1px 1em;
+  box-shadow:
+    inset 0 -0.175em white,
+    inset 0 -0.25em #000;
+  display: inline;
+}
+
+.desc-wrapper {
+  margin: 0;
+  min-width: 400px;
+  width: 60%;
+}
