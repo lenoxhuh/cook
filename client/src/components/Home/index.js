@@ -15,6 +15,12 @@ import {
   MealPlan
 } from '../Infrograph/index';
 
+import { 
+  HomeRecipesFeed,
+} from '../RecipesFeed/index';
+
+import { recipes } from '../../data/recipes';
+
 var diabetes_data = [
   {year: 2000, obesity: 30},
   {year: 2001, obesity: 40 },
@@ -107,6 +113,9 @@ class Home extends Component {
             />
           )
         ]}/>
+        <HomeRecipesFeed 
+          recipes={recipes}
+          />
     	</div>
 	  );
 	}
