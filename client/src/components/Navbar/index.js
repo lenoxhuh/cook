@@ -105,8 +105,10 @@ class NavMenu extends Component {
       }
     }
 
-    get_state(id) {
-      if (id === this.state.focus) {
+    get_state(link) {
+      let url = window.location.pathname.split('/');
+      let page = url[1]; 
+      if (link === page) {
         return "nav-link nav-focus";
       } else {
         return "nav-link";
@@ -121,7 +123,12 @@ class NavMenu extends Component {
         return links;
       }
       this.state.links.forEach(link => {
-        links.push(<Link className={this.get_state(i)} to={"/"+link}>{link}</Link>);
+        links.push(<Link 
+          className={this.get_state(link)} 
+          to={"/"+link}
+          >
+            {link}
+        </Link>);
         i++;
       });
       return links;

@@ -32,25 +32,39 @@ class Database {
   }
 }
 
-let articleSchema = new mongoose.Schema({
-	country: String,
+let recipeSchema = new mongoose.Schema({
   title: String,
+  type: String,
   description: String,
   created: {
     type: Date,
     default: Date.now
   },
+  cook_time: String,
+  cook_difficulty: String,
 	body: String,
-  photo: String,
+  cover_photo: String,
   photos: String,
 	video: String,
 	id: {
     type: Number
   }, 
+  recipe: {
+    type: [String]
+  },
+  ingredients: [{
+    ingredient: String,
+    category: String,
+    link: String,
+  }],
   userId: String,
   writer: String,
   comments: [{
     comment: String,
+    approved: {
+      type: Boolean,
+      default: "false"
+    },
     created: {
       type: Date,
       default: Date.now
@@ -68,18 +82,13 @@ let articleSchema = new mongoose.Schema({
 let userSchema = new mongoose.Schema({
 	username: String,
 	name: String,
-  country: String,
   description: String,
 	age: {
 		type: String,
 		default: "20"
 	},
-	school: {
-		type: String,
-		default: "Hotchkiss School"
-	},
   write: {
-    type: String,
+    type: Boolean,
     default: "false"
   },
 	id: Number
@@ -88,5 +97,5 @@ let userSchema = new mongoose.Schema({
 userSchema.plugin(passportLocalMongoose);
 
 module.exports = new Database()
-module.exports.Recipes = mongoose.model('Recipes', articleSchema);
+module.exports.Recipe = mongoose.model('Recipe', recipeSchema);
 module.exports.User = mongoose.model('User', userSchema);

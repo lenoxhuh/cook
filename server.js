@@ -10,7 +10,7 @@ const passport = require('passport')
 
 const port = process.env.PORT || 5000;
 
-// var {Article, User} = require('./database');
+var {Recipe, User} = require('./database');
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -32,19 +32,35 @@ app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
 });
 
-// app.post('/api/auth/login', function(req, res, next) {
-//   passport.authenticate('local', function(err, user, info) {
-//     if (err) { return next(err) }
-//     if (!user) {
-//       return res.redirect('/auth/login');
-//     }
-//     req.logIn(user, function(err) {
-//       if (err) { return next(err); }
-//       return res.redirect(`/${user.country}/profile/${user.id}`);
-//     });
-//   })(req, res, next);
-// });
-//
+app.post('/api/auth/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err) }
+    if (!user) {
+      return res.redirect('/auth/login');
+    }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect(`/${user.country}/profile/${user.id}`);
+    });
+  })(req, res, next);
+});
+
+app.post('/api/auth/register', (req, res) => {
+  User.register(new User({ 
+    username: req.body.username,
+    name: req.body.name,
+    country: req.body.country,
+    description: req.body.description,
+    age: req.body.age,
+  }), req.body.password, (err, user) => {
+    if (err) res.send(err);
+    passport.authenticate('local')(req, res, function () {
+      console.log("authenticated " + JSON.stringify(req.user));
+      res.status(200).redirect('/auth/login');
+    });
+  });
+});
+
 // app.post('/api/auth/register', (req, res) => {
 //   User.findOne({}, {}, { sort: { 'id' : -1 } }).limit(1).exec((err, user) => {
 //     if (err)
@@ -74,18 +90,18 @@ app.get('/api/hello', (req, res) => {
 // 	});
 //   });
 // });
-//
-// app.get('/api/auth/logout', function(req, res) {
-//   console.log("logging out!");
-//   req.logout();
-//   res.redirect('/');
-// });
-//
-// app.get('/api/user', function(req, res) {
-//   res.send({
-//     user: req.user,
-//   });
-// })
+
+app.get('/api/auth/logout', function(req, res) {
+  console.log("logging out!");
+  req.logout();
+  res.redirect('/');
+});
+
+app.get('/api/user', function(req, res) {
+  res.send({
+    user: req.user,
+  });
+});
 
 // app.post('/api/article/:id/up', (req, res) => {
 //   const body = req.body;

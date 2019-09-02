@@ -16,10 +16,165 @@ import {
 } from '../Infrograph/index';
 
 import { 
-  HomeRecipesFeed,
-} from '../RecipesFeed/index';
+  RecipeFeed,
+  TwitterFeed,
+} from '../Recipe/index';
 
-import { recipes } from '../../data/recipes';
+const recipes = [
+  {
+        "title": "Green Juice 1",
+        "cover_photo": "https://images.unsplash.com/photo-1473348164936-13be821e561c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        "type": "recipe",
+        "description": "Lorem ipsum dolor sit amet consectetur adipiscing elit, porta nam sociis pellentesque nec gravida montes rhoncus, dictumst varius felis lectus lacus curabitur. Placerat at praesent etiam class molestie aptent, arcu platea lectus litora vivamus donec, dignissim sociis ut maecenas fermentum.",
+        "cook_time": "45",
+        "cook_difficulty": "medium",
+        "recipe": [
+                "first thing",
+                "second thing",
+                "third thing",
+                "last thing"
+              ],
+        "ingredients": [
+          {
+            "ingredient": "Apple",
+            "category": "fruit",
+            "link": "http://www.apple.com"
+          },
+          {
+            "ingredient": "Kale",
+            "category": "vegetable",
+            "link": "http://www.kale.com"
+          },
+          {
+            "ingredient": "Yogurt",
+            "category": "Dairy",
+            "link": "http://www.yogurt.com"
+          }]
+    },
+    {
+        "title": "Green Juice 2",
+        "cover_photo": "https://images.unsplash.com/photo-1473348164936-13be821e561c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        "type": "recipe",
+        "description": "Lorem ipsum dolor sit amet consectetur adipiscing elit, porta nam sociis pellentesque nec gravida montes rhoncus, dictumst varius felis lectus lacus curabitur. Placerat at praesent etiam class molestie aptent, arcu platea lectus litora vivamus donec, dignissim sociis ut maecenas fermentum.",
+        "cook_time": "45",
+        "cook_difficulty": "medium",
+        "recipe": [
+                "first thing",
+                "second thing",
+                "third thing",
+                "last thing"
+              ],
+        "ingredients": [
+          {
+            "ingredient": "Apple",
+            "category": "fruit",
+            "link": "http://www.apple.com"
+          },
+          {
+            "ingredient": "Kale",
+            "category": "vegetable",
+            "link": "http://www.kale.com"
+          },
+          {
+            "ingredient": "Yogurt",
+            "category": "Dairy",
+            "link": "http://www.yogurt.com"
+          }]
+    },
+    {
+        "title": "Green Juice 3",
+        "cover_photo": "https://unsplash.com/photos/bPeqQXtfLPY",
+        "type": "recipe",
+        "description": "Lorem ipsum dolor sit amet consectetur adipiscing elit, porta nam sociis pellentesque nec gravida montes rhoncus, dictumst varius felis lectus lacus curabitur. Placerat at praesent etiam class molestie aptent, arcu platea lectus litora vivamus donec, dignissim sociis ut maecenas fermentum.",
+        "cook_time": "45",
+        "cook_difficulty": "medium",
+        "recipe": [
+                "first thing",
+                "second thing",
+                "third thing",
+                "last thing"
+              ],
+        "ingredients": [
+          {
+            "ingredient": "Apple",
+            "category": "fruit",
+            "link": "http://www.apple.com"
+          },
+          {
+            "ingredient": "Kale",
+            "category": "vegetable",
+            "link": "http://www.kale.com"
+          },
+          {
+            "ingredient": "Yogurt",
+            "category": "Dairy",
+            "link": "http://www.yogurt.com"
+          }]
+    },
+    {
+        "title": "Green Juice 4",
+        "cover_photo": "https://images.unsplash.com/photo-1473348164936-13be821e561c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        "type": "recipe",
+        "description": "Lorem ipsum dolor sit amet consectetur adipiscing elit, porta nam sociis pellentesque nec gravida montes rhoncus, dictumst varius felis lectus lacus curabitur. Placerat at praesent etiam class molestie aptent, arcu platea lectus litora vivamus donec, dignissim sociis ut maecenas fermentum.",
+        "cook_time": "45",
+        "cook_difficulty": "medium",
+        "recipe": [
+                "first thing",
+                "second thing",
+                "third thing",
+                "last thing"
+              ],
+        "ingredients": [
+          {
+            "ingredient": "Apple",
+            "category": "fruit",
+            "link": "http://www.apple.com"
+          },
+          {
+            "ingredient": "Kale",
+            "category": "vegetable",
+            "link": "http://www.kale.com"
+          },
+          {
+            "ingredient": "Yogurt",
+            "category": "Dairy",
+            "link": "http://www.yogurt.com"
+          }]
+    },
+    {
+        "title": "Green Juice 5",
+        "cover_photo": "https://images.unsplash.com/photo-1473348164936-13be821e561c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        "type": "recipe",
+        "description": "Lorem ipsum dolor sit amet consectetur adipiscing elit, porta nam sociis pellentesque nec gravida montes rhoncus, dictumst varius felis lectus lacus curabitur. Placerat at praesent etiam class molestie aptent, arcu platea lectus litora vivamus donec, dignissim sociis ut maecenas fermentum.",
+        "cook_time": "45",
+        "cook_difficulty": "medium",
+        "recipe": [
+                "first thing",
+                "second thing",
+                "third thing",
+                "last thing"
+              ],
+        "ingredients": [
+          {
+            "ingredient": "Apple",
+            "category": "fruit",
+            "link": "http://www.apple.com"
+          },
+          {
+            "ingredient": "Kale",
+            "category": "vegetable",
+            "link": "http://www.kale.com"
+          },
+          {
+            "ingredient": "Yogurt",
+            "category": "Dairy",
+            "link": "http://www.yogurt.com"
+          }]
+    }
+
+];
+
+console.log(recipes);
 
 var diabetes_data = [
   {year: 2000, obesity: 30},
@@ -113,9 +268,11 @@ class Home extends Component {
             />
           )
         ]}/>
-        <HomeRecipesFeed 
-          recipes={recipes}
+        <RecipeFeed
+          data={recipes}
+          type="half-list"
           />
+        <TwitterFeed />
     	</div>
 	  );
 	}

@@ -1,0 +1,142 @@
+.home-recipes-feed-wrapper {
+  padding: 60px;
+  padding-top: 120px;
+  position: relative;
+}
+
+.home-recipes-inside-wrapper {
+  width: 40%;
+  min-width: 400px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.recipe-list-item-header {
+  font-weight: 700;
+  font-family: "Open Sans Condensed";
+  font-size: 26px;
+  margin-bottom: 2.5px;
+}
+
+.recipe-feed-list-item-wrapper {
+  padding-left: 50px;
+  position: relative;
+}
+
+.recipe-list-item-subheader {
+  font-size: 20px;
+  font-family: 'lekton';
+  margin: 0;
+}
+
+.recipe-list-item-blurb {
+  font-family: 
+}
+
+.home-recipes-side-image {
+  width: 40%;
+  min-width: 400px;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  top: -134px;
+  padding-left: 80px;
+}
+
+.home-recipes-side-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+
+.recipe-list-item-ball {
+  width: 50px;
+  height: 50px;
+  background-color: #222;
+  border-radius: 100%;
+  position: absolute;
+  left: -25px;
+}
+
+.home-recipes-inside-wrapper {
+  padding-left: 80px;
+  top: -134px;
+  position: relative;
+  height: 645px;
+  z-index: 0;
+  overflow: scroll;
+}
+
+.recipes-feed-wrapper {
+  padding: 40px;
+  height: 400px;
+  /*background-color: #EEE;*/
+}
+
+.home-recipes-desc {
+  font-family: 'Unica One';
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 400;
+  transform: rotate(-90deg);
+  position: absolute;
+  left: 0;
+  top: 120px;
+  margin-right: 40px;
+}
+
+.home-recipes-desc:before {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 150px;
+  border-bottom: 1px solid #111;
+  width: 400px;;
+}
+
+.home-recipes-desc:after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: -80px;
+  border-bottom: 1px solid #111;
+  width: 50px;;
+}
+
+.twitter-wrapper {
+  padding: 20px;
+  height: 600px;
+  padding-top: 60px;
+  position: relative;
+}
+
+.twitter-wrapper-side-header {
+  font-family: 'Unica One';
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 400;
+  transform: rotate(-90deg);
+  position: absolute;
+  right: 60px;
+  top: 120px;
+  margin-right: 40px;
+}
+
+.twitter-wrapper-side-header:before {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 110px;
+  border-bottom: 1px solid #111;
+  width: 400px;;
+}
+
+.twitter-wrapper-side-header:after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: -80px;
+  border-bottom: 1px solid #111;
+  width: 50px;;
+}

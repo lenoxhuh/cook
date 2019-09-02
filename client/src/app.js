@@ -3,12 +3,17 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import Navbar from './components/Navbar/index';
 import Home from './components/Home/index';
+import { Article } from './components/Article/index';
+import { Recipe } from './components/Recipe/index';
+import About from './components/About/index';
 
-// import { NewUser, LoginUser } from './components/Auth/index';
+import { NewUser, LoginUser } from './components/Auth/index';
 
 // const User = ({ match }) => (
 //   <Profile userId={match.params.id} country={match.params.country} />
 // );
+//
+//
 
 
 class App extends Component {
@@ -38,6 +43,11 @@ class App extends Component {
         <div>
           <Navbar />
           <Route exact path="/" component={Home} />
+          <Route exact path="/articles" component={Article} />
+          <Route exact path="/recipes" component={Recipe} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/auth/login" component={LoginUser} />
+          <Route exact path="/auth/register" component={NewUser} />
         </div>
       </Router>
     );
