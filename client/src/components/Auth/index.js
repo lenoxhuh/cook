@@ -75,16 +75,13 @@ class NewUser extends Component {
     getValid() {
         let {
             username,
-            country,
             name,
-						age,
-						school,
             description,
             password,
             verify_password,
         } = this.state.formValues;
 
-        if (username && country && name && age && school && description && password && password === verify_password) {
+        if (username && name && description && password && password === verify_password) {
             console.log("valid");
             return "valid";
         } else {
@@ -111,40 +108,10 @@ class NewUser extends Component {
                         <input id="username" name="username" type="text" onChange={this.handleChange.bind(this)} />
                     </div>
 
-                    <div className="form-row select">
-                        <label htmlFor="country">Interested Country</label>
-                        <select id="country" type="country" name="country" onChange={this.handleChange.bind(this)}>
-                            <option value="China">China</option>
-                            <option value="Colombia">Colombia</option>
-                            <option value="India">India</option>
-                            <option value="Sri Lanka">Sri Lanka</option>
-                            <option value="South Africa">South Africa</option>
-                            <option value="Hungary">Hungary</option>
-														<option value="Cambodia">Cambodia</option>
-                            <option value="Philippines">Philippines</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Dominican Republic">Dominican Republic</option>
-                            <option value="Australia">Australia</option>
-                        </select>
-                    </div>
-
                     <div className="form-row">
                         <label htmlFor="name">Full Name</label>
                         <br />
                         <input id="name" name="name"  onChange={this.handleChange.bind(this)} />
-                    </div>
-
-										<div className="form-row">
-                        <label htmlFor="age">Age</label>
-                        <br />
-                        <input id="age" name="age"  onChange={this.handleChange.bind(this)} />
-                    </div>
-
-										<div className="form-row">
-                        <label htmlFor="school">School</label>
-                        <br />
-                        <input id="school" name="school"  onChange={this.handleChange.bind(this)} />
                     </div>
 
                     <div className="form-row">

@@ -30,7 +30,6 @@
 }
 
 .recipe-list-item-blurb {
-  font-family: 
 }
 
 .home-recipes-side-image {
@@ -139,4 +138,165 @@
   right: -80px;
   border-bottom: 1px solid #111;
   width: 50px;;
+}
+
+.recipe-home-banner-wrapper {
+  padding: 80px;
+  padding-top: 40px;
+  height: 500px;
+}
+
+.recipe-home-banner-wrapper p {
+  line-height: 1em;
+}
+
+.recipe-list-banner {
+  height: 400px;
+  border-radius: 12px;
+  width: calc(100vw - 160px);
+  min-width: 400px;
+  overflow: hidden;
+  margin-top: 24px;
+  position: relative;
+}
+
+.recipe-list-banner img {
+  width: 100%;
+  height: auto;
+}
+
+.recipe-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  padding: 40px;
+}
+
+.recipe-overlay-popup {
+	width: 80%;
+  background-color: rgba(50, 50, 50, 0.7);
+	opacity: 1;
+  padding: 20px;
+  padding-bottom: 60px;
+  border-radius: 12px;
+	background-blend-mode: multiply;
+	position: relative; 
+	top: 0px;
+	z-index: 1;
+}
+
+.recipe-fab {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  text-align: center;
+  background-color: #BBB;
+  font-size: 20px;
+  color: white;
+  font-weight: 900;
+  background-blend-mode: multiply;
+  transition: 400ms;
+  opacity: 0.7;
+	position: absolute;
+	z-index: 5;
+}
+
+.recipe-fab-clicked {
+	left: calc(100% * 0.8 - 50px);
+	top: 55px;
+	transform: rotate(45deg);
+	background: None;
+}
+
+.recipe-fab:hover  {
+  opacity: 1;
+}
+
+.recipe-fab-inside {
+  position: relative;
+  top: 20%;
+  margin: 0;
+  transform: translateY(-25%);
+  font-size: 24px;
+}
+
+.hidden {
+	opacity: 0;
+}
+
+.recipe-overlay-popup p {
+  line-height: 1em !important;
+  margin: 0 !important;
+	color: white;
+}
+
+.popup-title {
+  font-family: 'lekton';
+  font-weight: 600;
+  font-size: 28px;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.subpopup-title {
+  font-family: 'lekton';
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.popup-desc {
+  padding-top: 30px;
+	font-family: 'Cabin';
+	line-height: 1.5em;
+	font-size: 16px;
+	font-weight: 300 !important; 
+}
+
+.ingredients-wrapper {
+  padding-top: 40px;
+}
+
+.ingredient {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  background-color: #BBB;
+  display: inline-block;
+  margin-right: 15px;
+  text-align: center;
+}
+
+.ingredient img {
+  width: 60%;
+  height: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.ingredient-name {
+  font-family: 'lekton';
+  font-weight: 700;
+  position: relative;
+  top: 2em; 
+	text-decoration: None;
+	color: white;
+}
+
+.ing-input-button {
+	position: relative;
+	display: inline-block;
+	float: right;
+	top: -4em;
+	font-size: 18px;
+}
+
+.ing-input {
+	position: relative;
+}
+
+.ing-input-button {
+	margin: 0;
 }

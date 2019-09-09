@@ -76,7 +76,8 @@ let recipeSchema = new mongoose.Schema({
     type: [Number], 
 		unique: false,
 		sparse: true
-  } 
+  },
+  author: String
 });
 
 let userSchema = new mongoose.Schema({

@@ -40,7 +40,7 @@ app.post('/api/auth/login', function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.redirect(`/${user.country}/profile/${user.id}`);
+      return res.redirect(`/profile/${user._id}`);
     });
   })(req, res, next);
 });
@@ -102,6 +102,48 @@ app.get('/api/user', function(req, res) {
     user: req.user,
   });
 });
+
+app.post('/api/recipe', (req, res) => {
+  const body = req.body;
+  const user = req.user;
+
+	console.log("Received req " + JSON.stringify(body));
+	console.log("Received user " + JSON.stringify(user));
+
+  if (!user) {
+    res.redirect('/');
+  }
+
+	body['userId'] = user._id;
+	body['writer'] = user.name;
+
+	let recipe = new Recipe(body);
+	console.log("Received " + JSON.stringify(recipe));
+	recipe.save();
+
+  res.redirect('/');
+});
+
+app.get('/api/recipes', (req, res) => {
+	const body = req.body
+	Recipe.find({}).exec((err, recipes) => {
+		if (err) throw err;
+		var r;
+
+    if (recipes && recipes.length > 0) {
+			r = recipes.sort((a,b) => {
+				return a.created > b.created;
+			});
+    }
+
+		console.log(JSON.stringify(recipes));
+
+    res.send({
+      recipes: r
+    });
+	});
+});
+
 
 // app.post('/api/article/:id/up', (req, res) => {
 //   const body = req.body;
