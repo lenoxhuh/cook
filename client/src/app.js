@@ -5,7 +5,7 @@ import './App.css';
 import Navbar from './components/Navbar/index';
 import Home from './components/Home/index';
 import { Article } from './components/Article/index';
-import { Recipe, NewRecipe } from './components/Recipe/index';
+import { Recipe, NewRecipe, RecipePage, RecipeResults } from './components/Recipe/index';
 import About from './components/About/index';
 
 import { NewUser, LoginUser } from './components/Auth/index';
@@ -13,8 +13,14 @@ import { NewUser, LoginUser } from './components/Auth/index';
 // const User = ({ match }) => (
 //   <Profile userId={match.params.id} country={match.params.country} />
 // );
-//
-//
+
+const RecipeResultsQuery = ({ match }) => (
+  <RecipeResults query={match.params.query} />
+);
+
+const RecipePageLoad = ({ match}) => (
+  <RecipePage recipeid={match.params.id} />
+);
 
 class App extends Component {
   state = {
@@ -45,10 +51,13 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/articles" component={Article} />
           <Route exact path="/recipes" component={Recipe} />
-          <Route exact path="/recipes/new" component={NewRecipe} />
+          <Route exact path="/new/recipes" component={NewRecipe} />
+          <Route exact path="/recipes/:id" component={RecipePageLoad} />
           <Route exact path="/about" component={About} />
           <Route exact path="/auth/login" component={LoginUser} />
           <Route exact path="/auth/register" component={NewUser} />
+          <Route exact path="/search/:query" component={RecipeResultsQuery} />
+          <Route exact path="/search/" component={RecipeResults} />
         </div>
       </Router>
     );

@@ -1,3 +1,12 @@
+a {
+  text-decoration: None;
+  color: black;
+}
+
+a:visted {
+  color: black;
+}
+
 .home-recipes-feed-wrapper {
   padding: 60px;
   padding-top: 120px;
@@ -21,6 +30,7 @@
 .recipe-feed-list-item-wrapper {
   padding-left: 50px;
   position: relative;
+  margin-bottom: 30px;
 }
 
 .recipe-list-item-subheader {
@@ -153,7 +163,7 @@
 .recipe-list-banner {
   height: 400px;
   border-radius: 12px;
-  width: calc(100vw - 160px);
+  width: calc(100vw - 350px);
   min-width: 400px;
   overflow: hidden;
   margin-top: 24px;
@@ -177,13 +187,13 @@
 	width: 80%;
   background-color: rgba(50, 50, 50, 0.7);
 	opacity: 1;
-  padding: 20px;
+  padding: 30px;
   padding-bottom: 60px;
   border-radius: 12px;
 	background-blend-mode: multiply;
 	position: relative; 
 	top: 0px;
-	z-index: 1;
+  z-index: 1;
 }
 
 .recipe-fab {
@@ -203,8 +213,8 @@
 }
 
 .recipe-fab-clicked {
-	left: calc(100% * 0.8 - 50px);
-	top: 55px;
+  left: calc(80% - 40px);
+	top: 45px;
 	transform: rotate(45deg);
 	background: None;
 }
@@ -226,13 +236,12 @@
 }
 
 .recipe-overlay-popup p {
-  line-height: 1em !important;
-  margin: 0 !important;
 	color: white;
 }
 
 .popup-title {
   font-family: 'lekton';
+  width: 80%;
   font-weight: 600;
   font-size: 28px;
   margin: 0;
@@ -246,30 +255,24 @@
   padding: 0;
 }
 
-.popup-desc {
-  padding-top: 30px;
-	font-family: 'Cabin';
-	line-height: 1.5em;
-	font-size: 16px;
-	font-weight: 300 !important; 
-}
-
 .ingredients-wrapper {
   padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .ingredient {
   width: 70px;
   height: 70px;
   border-radius: 100%;
-  background-color: #BBB;
+  background-color: #EEE;
   display: inline-block;
   margin-right: 15px;
   text-align: center;
+  vertical-align: top;
 }
 
 .ingredient img {
-  width: 60%;
+  width: 75% !important;
   height: auto;
   position: relative;
   top: 50%;
@@ -280,7 +283,7 @@
   font-family: 'lekton';
   font-weight: 700;
   position: relative;
-  top: 2em; 
+  top: 0em;
 	text-decoration: None;
 	color: white;
 }
@@ -299,4 +302,158 @@
 
 .ing-input-button {
 	margin: 0;
+}
+
+.recipe-wrapper {
+  padding: 80px;
+}
+
+.recipe-wrapper p {
+  line-height: 1.25em;
+  margin: 0;
+}
+
+.recipe-img-wrapper {
+  height: 500px;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 30px;
+}
+
+.line {
+  border-bottom: 1px solid #EEE;
+}
+
+.recipe-section {
+  padding: 25px 0 !important;
+}
+
+.recipe-section p {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.recipe-header {
+  font-family: 'lekton';
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
+  padding-top: 40px;
+  border-top: 1px solid #BBB;
+}
+
+.recipe-subheader {
+  font-family: 'lekton';
+  font-size: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+.section-header {
+  font-family: "Cabin";
+  font-weight: 500;
+  font-size: 22px !important;
+  padding-bottom: 5px;
+}
+
+.recipe-wrapper img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+#ing-banner img {
+  width: 70%;
+  height: auto;
+}
+
+.recipe-section a {
+  color: black !important;
+  top: 0em;
+}
+
+.tag {
+  background-color: #DDD;
+  border-radius: 12px; 
+  padding: 5px 20px;
+  margin-right: 15px;
+  opacity: 0.8;
+  transition: 500ms;
+  display: inline;
+  font-family: 'lekton';
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.tag:hover {
+  opacity: 1;
+}
+
+.section-content {
+  padding: 5px 0; 
+}
+
+.directions-wrapper {
+  padding-left: 20px;
+}
+
+.direction-wrapper {
+  padding: 10px;
+  padding-left: 20px;
+  margin: 20px 0;
+  border-left: 4px solid #BBB;
+  transition: 300ms;
+}
+
+.clicked {
+  border-left: 4px solid black;
+}
+
+.popup-desc {
+  padding-top: 30px !important;
+	font-family: 'Cabin' !important;
+	line-height: 1.5em !important;
+	font-size: 16px;
+  font-weight: 300 !important; 
+}
+
+.results-search-wrapper {
+  top: 0;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.results-wrapper {
+  padding: 0 80px;
+}
+
+.results-search-wrapper input[type=text] {
+  font-family: "Cabin";
+  color: #565554;
+  transition: 0.5s;
+  width: calc(100% - 60px);
+  min-width: 200px;
+  background-color: #EEE;
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: #223037;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  margin: 0;
+}
+
+.results-wrapper-wrapper {
+  padding-top: 40px;
+}
+
+.result-item-wrapper {
+  border-radius: 10px;
+  width: 70%;
+  min-width: 400px;
+  padding: 30px;
+  background: rgba(230,230,230,0.1); 
+  border: solid 1px #CCC;
+  max-height: 300px;
 }

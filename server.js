@@ -110,7 +110,7 @@ app.post('/api/recipe', (req, res) => {
 	console.log("Received req " + JSON.stringify(body));
 	console.log("Received user " + JSON.stringify(user));
 
-  if (!user) {
+  if (!user && !user.write) {
     res.redirect('/');
   }
 
@@ -144,6 +144,26 @@ app.get('/api/recipes', (req, res) => {
 	});
 });
 
+app.get('/api/recipes/:id', (req,res) => {
+  const body = req.body
+  Recipe.find({_id: req.params.id}).exec((err, recipe) => {
+    if (err) throw err;
+    
+    res.send({
+      recipe: recipe
+    });
+  });
+});
+
+app.get('/api/recipes/title/:title', (req, res) => {
+  Recipe.find({"title": { $regex: req.params.title, $options: 'i'}}).exec((err, recipes) => {
+    if (err) throw err;
+    console.log(recipes);  
+    res.send({
+      recipes: recipes
+    });
+  });
+});
 
 // app.post('/api/article/:id/up', (req, res) => {
 //   const body = req.body;

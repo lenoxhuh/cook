@@ -57,6 +57,7 @@ let recipeSchema = new mongoose.Schema({
     category: String,
     link: String,
   }],
+  tags: [String],
   userId: String,
   writer: String,
   comments: [{

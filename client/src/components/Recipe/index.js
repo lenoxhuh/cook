@@ -183,7 +183,7 @@ class RecipeFeedListItem extends Component {
   }
 
   get_subheader() {
-    return `Cook time ${this.state.recipe.cook_time}, ${this.state.recipe.cook_difficulty} Difficulty`
+    return `Cook time ${this.props.recipe.cook_time}, ${this.props.recipe.cook_difficulty} Difficulty`
   }
 
   render() {
@@ -193,14 +193,14 @@ class RecipeFeedListItem extends Component {
         onClick={() => this.props.update_selected(this.props.list_id)}
         >
         <div className="recipe-list-item-ball"></div>
-        <p className="recipe-list-item-header">
+        <a className="recipe-list-item-header"  href={"/recipes/" + this.props.recipe._id}>
           { this.props.recipe.title }
-        </p>
+        </a>
         <p className="recipe-list-item-subheader">
           { this.get_subheader() }
         </p>
         <p className="recipe-list-item-blurb">
-          { this.props.recipe.description }
+          { this.props.recipe.description.slice(0,200) }
         </p>
       </div>
     );
@@ -588,39 +588,44 @@ class NewRecipe extends Component {
     }
 
     handleSubmit() {
-				if (this.state.formValues.recipe) {
-					this.state.formValues.recipe = this.state.formValues.recipe.split(',');
-				}
-				
-				console.log("submitting with formValues " + JSON.stringify(this.state.formValues));
+        if (this.state.formValues.recipe) {
+            this.state.formValues.recipe = this.state.formValues.recipe.split(',');
+        }
 
-				fetch('/api/recipe', {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-						'Access-Control-Alllow-Origin': '*',
-					},
-					body: JSON.stringify(this.state.formValues),
-				}).then(res => {
-					console.log("RES: " + JSON.stringify(res));
-				}).catch(err => {
-					console.log(err)
-				});
+        if (this.state.formValues.tags) {
+            this.state.formValues.tags = this.state.formValues.tags.split(',');
+        }
+        
+        console.log("submitting with formValues " + JSON.stringify(this.state.formValues));
 
-				console.log("Submitted");
-				window.location.pathname="/";
+        fetch('/api/recipe', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Alllow-Origin': '*',
+            },
+            body: JSON.stringify(this.state.formValues),
+        }).then(res => {
+            console.log("RES: " + JSON.stringify(res));
+        }).catch(err => {
+            console.log(err)
+        });
+
+        console.log("Submitted");
+        window.location.pathname="/";
     }
 
     getValid() {
         let {
             title,
             cover_photo,
-						photos,
-						cook_difficulty,
+			photos,
+			cook_difficulty,
+			cook_time,
             description,
             body,
-						recipe,
+			recipe,
         } = this.state.formValues;
 
         if (title && recipe && cover_photo && cook_difficulty && description && body) {
@@ -630,9 +635,10 @@ class NewRecipe extends Component {
         }
     }
 
-		update_ingredients(ingredients) {
-			this.state.formValues.ingredients = ingredients;
-		}
+    update_ingredients(ingredients) {
+        console.log("Updated ingredients " + JSON.stringify(ingredients));
+        this.state.formValues.ingredients = ingredients;
+    }
 
     render() {
         return (
@@ -647,11 +653,15 @@ class NewRecipe extends Component {
                         <input name="title" type="text" onChange={this.handleChange.bind(this)} />
                     </div>
 
-										<div className="form-row">
+                    <div className="form-row">
                         <label htmlFor="cook_difficulty">Difficulty</label>
                         <input name="cook_difficulty" type="text" onChange={this.handleChange.bind(this)} />
                     </div>
-
+                    
+                    <div className="form-row">
+                        <label htmlFor="cook_time">Cook Time</label>
+                        <input name="cook_time" type="text" onChange={this.handleChange.bind(this)} />
+                    </div>
 
                     <div className="form-row">
                         <label htmlFor="cover_photo">Cover Photo</label>
@@ -674,20 +684,26 @@ class NewRecipe extends Component {
                         <input id="photos" name="photos" type="text" onChange={this.handleChange.bind(this)} />
                     </div>
 
-										<div className="form-row">
-												<label htmlFor="recipe">Recipe</label>
+                    <div className="form-row">
+						<label htmlFor="recipe">Recipe</label>
                         <p>Seperate Instructions by Commas</p>
                         <input id="recipe" name="recipe" type="text" onChange={this.handleChange.bind(this)} />
-										</div>	
+			    	</div>	
 
-										<IngredientsSelector 
-											updateIng={(ingredients) => this.update_ingredients(ingredients)}/>	
+                    <div className="form-row">
+						<label htmlFor="tags">tags</label>
+                        <p>Separate Tags by Commas</p>
+                        <input id="tags" name="tags" type="text" onChange={this.handleChange.bind(this)} />
+			    	</div>	
+
+					<IngredientsSelector 
+						updateIng={(ingredients) => this.update_ingredients(ingredients)}/>	
 
                     <div className="form-row">
                         <button 
-													className={this.getValid()}
-													onClick={() => this.getValid() && this.handleSubmit()}
-													>Submit</button>
+						    className={this.getValid()}
+							onClick={() => this.getValid() && this.handleSubmit()}
+						    >Submit</button>
                     </div>
                 </form>
             </div>
@@ -817,15 +833,14 @@ class RecipeHomeBanner extends Component {
 
   constructor(props) {
     super(props);
-		console.log("HomeBanner " + JSON.stringify(this.props) + " " + JSON.stringify(props));
     this.state = {
-			recipe: this.props.recipe,
+    recipe: this.props.recipe,
       expanded: false
     }
   }
 
   get_subheader() {
-    return `Cook time ${this.state.recipe.cook_time}, ${this.state.recipe.cook_difficulty} Difficulty`
+    return `Cook time ${this.props.recipe.cook_time}, ${this.props.recipe.cook_difficulty} Difficulty`
   }
 
   toggle() {
@@ -851,15 +866,13 @@ class RecipeHomeBanner extends Component {
 	}
 
   render() {
-		console.log("BANNER recipe " + JSON.stringify(this.props.recipe[0]));
-		let recipe = this.props.recipe[0];
-		if (recipe) {
+		if (this.props.recipe) {
     	return (
       <div className="recipe-home-banner-wrapper">
-        <p className="recipe-list-item-header banner-header"> { recipe.title } </p>
+        <a className="recipe-list-item-header banner-header" href={"/recipes/" + this.props.recipe._id}> { this.props.recipe.title } </a>
         <p className="recipe-list-item-subheader banner-subheader"> { this.get_subheader() } </p>
         <div className="recipe-list-banner">
-          <img src={recipe.cover_photo} />
+          <img src={this.props.recipe.cover_photo} />
           <div className="recipe-overlay">
             <div 
               className={this.get_state()}
@@ -868,10 +881,10 @@ class RecipeHomeBanner extends Component {
               <span className="recipe-fab-inside">+</span>
             </div>
             <div className={this.get_overlay_state()}>
-              <p className="popup-title">{recipe.title}</p>
+              <p className="popup-title">{this.props.recipe.title}</p>
               <p className="subpopup-title">{this.get_subheader()}</p>
-              <p className="popup-desc">{recipe.description}</p>
-              <IngredientsBanner ingredients={recipe.ingredients} /> 
+              <p className="popup-desc">{this.props.recipe.description.slice(0,200)}</p>
+              <IngredientsBanner ingredients={this.props.recipe.ingredients} /> 
             </div>
           </div>
         </div>
@@ -883,20 +896,147 @@ class RecipeHomeBanner extends Component {
   }
 }
 
+
+class Tag extends Component {
+    render() {
+        return (
+            <div className="tag">
+                {this.props.tag}
+            </div>
+        );
+    }
+}
+
+class Directions extends Component {
+    get_directions() {
+        let directions = [];
+        if (this.props.directions) {
+            this.props.directions.forEach(direction => {
+                directions.push(
+                    <Direction direction={direction} />
+                );
+            });
+        }
+        return directions;
+    }
+
+    render() {
+        return (
+            <div className="directions-wrapper">
+                {this.get_directions()}
+            </div>
+        );
+    }
+}
+
+class Direction extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            clicked: false 
+        }
+    }
+
+    render() {
+        let is_clicked = (this.state.clicked) ? "direction-wrapper clicked" : "direction-wrapper";
+        return (
+            <div className={is_clicked} onClick={() => {
+                console.log("Clicked");
+                this.setState({clicked: !this.state.clicked})
+             }}>
+                {this.props.direction}
+            </div>
+        );
+    }
+}
+
+class RecipePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            recipe: {}
+        }
+    }
+
+    get_tags() {
+        let tags = [];
+        if (!this.state.recipe || !this.state.recipe.tags) {
+            return tags;
+        }
+        this.state.recipe.tags.forEach(tag => {
+            tags.push(
+                <Tag tag={tag} />
+            );
+        });
+        return tags;
+    }
+
+    componentDidMount(props) {
+        fetch('/api/recipes/' + this.props.recipeid)
+        .then(data => data.json())
+		.then(data => {
+            console.log("Found recipe " + JSON.stringify(data.recipe[0]));
+            this.setState({
+                recipe: data.recipe[0]
+            });
+		});
+    }
+
+    get_subheader() {
+        return `Cook time ${this.state.recipe.cook_time}, ${this.state.recipe.cook_difficulty} Difficulty`
+    }
+
+    render() {
+        if (this.state.recipe) {
+            return (
+                <div className="recipe-wrapper">
+                    <div className="recipe-img-wrapper">
+                        <img src={this.state.recipe.cover_photo} />
+                    </div>
+                    <br className="line"></br>
+                    <p className="recipe-header">{this.state.recipe.title}</p>
+                    <p className="recipe-subheader">{this.get_subheader()}</p>
+                    <div className="recipe-section">
+                        <p className="section-header">Tags</p>
+                        <p className="section-content">{this.get_tags()}</p>
+                    </div>
+                    <div className="recipe-section">
+                        <p className="section-header">Description</p>
+                        <p className="section-content">{this.state.recipe.description}</p>
+                    </div>
+                    <div id="ing-banner" className="recipe-section">
+                        <p className="section-header">Ingredients</p>
+                        <IngredientsBanner ingredients={this.state.recipe.ingredients} /> 
+                    </div>
+                    <div className="recipe-section">
+                        <p className="section-header">Directions</p>
+                        <p className="section-content">
+                            <Directions directions={this.state.recipe.recipe} />
+                        </p>
+                    </div>
+
+                </div>
+            );
+        } else {
+            return (<div></div>);
+        }
+    }
+}
+
 class Recipe extends Component {
   constructor(props) {
     super(props);
-		this.state = {
-			recipes: []
-		}
+    this.state = {
+        recipes: []
+    }
   }
 
 	componentWillReceiveProps(newProps) {
-			this.get_recipes();
+        this.get_recipes();
 	}
 
-	componentShouldMount() {
-			this.get_recipes();
+	componentDidMount() {
+        this.get_recipes();
 	}
 
   get_recipes() {
@@ -923,8 +1063,8 @@ class Recipe extends Component {
 		console.log("sending first" + JSON.stringify(recipes[0]));
 		
 		let banner = (recipes) ? 
-    	(<RecipeHomeBanner
-				recipe={recipes} 
+            (<RecipeHomeBanner
+				recipe={recipes[0]} 
 				/>) :
 			null;
 
@@ -938,11 +1078,126 @@ class Recipe extends Component {
 
     return (
       <div className="recipe-wrapper">
-				{banner}
-				{feed}
-			</div>
+        {banner}
+        {feed}
+      </div>
     );
   }
+}
+
+class SearchBar extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+      }
+    }
+  
+    render() {
+        let placeholder = (this.props.query) ? this.props.query : "Begin your search"
+        return (
+            <div className="results-search-wrapper">
+             <input type="text" onChange={(e) => this.props.updateSearch(e)} placeholder={placeholder}/>
+            </div>
+        );
+    }
+  }
+
+class RecipeResultItem extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    get_subheader() {
+        return `Cook time ${this.props.recipe.cook_time}, ${this.props.recipe.cook_difficulty} Difficulty`
+    }
+
+    get_tags() {
+        let tags = [];
+        if (!this.props.recipe || !this.props.recipe.tags) {
+            return tags;
+        }
+        this.props.recipe.tags.forEach(tag => {
+            tags.push(
+                <Tag tag={tag} />
+            );
+        });
+        return tags;
+    }
+
+    render() {
+        return (
+            <div className="result-item-wrapper">
+                <a className="recipe-list-item-header" href={"/recipes/" + this.props.recipe._id }>
+                    { this.props.recipe.title }
+                </a>
+                <p className="recipe-list-item-subheader">
+                    { this.get_subheader() }
+                </p>
+                <p className="recipe-list-item-blurb">
+                    { this.props.recipe.description.slice(1,200) }
+                </p>
+                <p className="section-content">{this.get_tags()}</p>
+            </div>
+        );
+    }
+}
+
+class RecipeResults extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            recipes: [],
+            query: this.props.query
+        }
+    }
+
+    componentDidMount() {
+        fetch('/api/recipes/')
+		.then(data => data.json())
+		.then(data => {
+            this.setState({
+                recipes: data.recipes,
+            });
+		}); 
+    }
+
+    get_results() {
+        let results = [];
+        if (this.state.recipes && this.state.query) {
+            this.state.recipes.forEach(recipe => {
+                if (recipe.title.toLowerCase().includes(this.state.query.toLowerCase())) {
+                    results.push(
+                        <RecipeResultItem recipe={recipe} />
+                    );
+                }
+            });
+        }
+        return results;
+    }
+
+    update_query(e) {
+        console.log("Updating search query: " + e.target.value);
+        this.setState({
+            query: e.target.value
+        });
+    }
+
+    render() {
+        return (
+            <div className="results-wrapper">
+                <div className='results-search-wrapper'>
+                    <SearchBar 
+                        query={this.props.query}
+                        searchPage={true}
+                        updateSearch={(e) => this.update_query(e)}
+                        />
+                </div>
+                <div className="results-wrapper-wrapper">
+                    {this.get_results()}
+                </div>
+            </div>
+        )
+    }
 }
 
 export {
@@ -952,5 +1207,7 @@ export {
     NewRecipe,
     RecipeFeed,
     TwitterFeed,
-    Recipe
+    Recipe,
+    RecipePage,
+    RecipeResults
 }

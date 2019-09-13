@@ -150,13 +150,27 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+        query: ""
     }
   }
 
+  handleChange(e) {
+      this.setState({
+        query: e.target.value
+      });
+  }
+
+  handleKeyDown(e) {
+      if (e.key == 'Enter') {
+          window.location.href = "/search/" + this.state.query
+       }
+  }
+
   render() {
+    let placeholder = (this.props.query) ? this.props.query : "Begin your search"
     return (
       <div className="search-wrapper">
-        <input type="text" placeholder="Begin your search"/>
+        <input type="text" placeholder={placeholder} onChange={(e) => this.handleChange(e)} onKeyDown={(e) => this.handleKeyDown(e)}/>
       </div>
     )
   }
