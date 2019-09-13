@@ -31,6 +31,6 @@
     "concurrently": "^3.5.0"
   },
   "engines": {
-    "node": "8.9.3"
+    "node": "8.12.0"
   }
 }
