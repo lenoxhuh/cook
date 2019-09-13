@@ -1,5 +1,5 @@
 {
-  "name": "the-humanitarian-journal",
+  "name": "the-cooking-app",
   "version": "1.0.0",
   "scripts": {
     "client": "cd client && yarn start",
