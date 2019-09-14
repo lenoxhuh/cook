@@ -150,14 +150,16 @@ class RecipeFeed extends Component {
   }
 
   get_focused_image() {
-    var selected = this.props.data[this.state.selected]
-    if (selected && this.props.type === "half-list") {
-      return (
-        <div className="home-recipes-side-image">
-          <img src={selected.cover_photo} />
-        </div>
+    if (this.props.data) {
+        var selected = this.props.data[this.state.selected]
+        if (selected && this.props.type === "half-list") {
+            return (
+                <div className="home-recipes-side-image">
+                <img src={selected.cover_photo} />
+                </div>
 
-      );
+            );
+        }
     }
   }
 

@@ -77,7 +77,8 @@ class MealPlan extends Component {
       plans.push(
         <MealPlanBar 
           title={data.category}
-          data={data.divisions}
+          divisions={data.divisions}
+          color={data.color}
           />
       )
     );
@@ -98,12 +99,32 @@ class MealPlanBar extends Component {
     super(props);
   }
 
+  get_bars() {
+    let bars = [];
+    if (this.props.divisions) {
+      this.props.divisions.forEach(division => {
+        bars.push(
+          <div className="bar" style={{
+            "width": `${division.amount}%`,
+            "height": "100%",
+            "background-color": `${this.props.color}`,
+            "position": "relative",
+          }}>
+            <p className="bar-desc">{division.type}</p>
+          </div>
+        );
+      });
+    }
+    return bars;
+  }
+
   render() {
     return (
       <div className="meal-plan-bar">
         <p className="meal-plan-title">
           {this.props.title}     
         </p>
+        {this.get_bars()}
       </div>
     );
   }
