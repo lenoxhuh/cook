@@ -842,7 +842,7 @@ class IngredientsBanner extends Component {
       ingredients.push(
         <div className="ingredient">
           <img src={this.get_source(ingredient.category)} />
-          <a href={ingredient.link} className="ingredient-name"> {ingredient.ingredient} </a> 
+          <a href={`http://${ingredient.link}`} className="ingredient-name"> {ingredient.ingredient} </a> 
         </div>
       );
     });
@@ -1020,12 +1020,14 @@ class RecipePage extends Component {
         }
         
         this.state.nutrients.forEach(nutrient=> {
+            if (this.state.recipe[nutrient]) {
             nutrients.push(
             <div className="nutrient">
                 <p className="num" >{this.state.recipe[nutrient]}</p>
                 <p className="num-desc" >{nutrient}</p>
             </div>
             );
+            }
         });
     
         return nutrients;
