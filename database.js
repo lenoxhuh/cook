@@ -44,11 +44,6 @@ let recipeSchema = new mongoose.Schema({
   cook_difficulty: String,
 	body: String,
   cover_photo: String,
-  photos: String,
-	video: String,
-	id: {
-    type: Number
-  }, 
   recipe: {
     type: [String]
   },
@@ -60,40 +55,21 @@ let recipeSchema = new mongoose.Schema({
   tags: [String],
   userId: String,
   writer: String,
-  comments: [{
-    comment: String,
-    approved: {
-      type: Boolean,
-      default: "false"
-    },
-    created: {
-      type: Date,
-      default: Date.now
-    },
-    name: String,
-    userId: Number
-  }],
-  upvotes: {
-    type: [Number], 
-		unique: false,
-		sparse: true
-  },
-  author: String
+  author: String,
+  calories: Number,
+  carbs: Number,
+  protein: Number,
+  fat: Number
 });
 
 let userSchema = new mongoose.Schema({
 	username: String,
 	name: String,
   description: String,
-	age: {
-		type: String,
-		default: "20"
-	},
   write: {
     type: Boolean,
-    default: "false"
-  },
-	id: Number
+    default: false
+  }
 });
 
 userSchema.plugin(passportLocalMongoose);

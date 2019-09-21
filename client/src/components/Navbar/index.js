@@ -63,24 +63,29 @@ class NavLogo extends Component {
     }
 
     get_auth() {
-        const create = (this.props.user && this.props.user.write === "true") ?
-            (<Link to="/article/new" className="nav-logo">New Article</Link>) :
+        const create = (this.props.user && this.props.user.write) ?
+            (<Link to="/article/new" className="nav-logo auth">New Article</Link>) :
             (<div></div>);
+
+        let new_recipes = (this.props.user && this.props.user.write) ? 
+            (<Link to="/new/recipes" className="nav-logo auth">New Recipe</Link>) :
+            null;
 
         if (this.props.user && Object.keys(this.props.user).length) {
             return (
-                <div className="nav-logo auth">
+                <div className="auth-container">
                     {create}
-                    <Link to="/" onClick={() => this.logout()} className="nav-logo">Logout</Link>
+                    {new_recipes}
+                    <Link to="/" onClick={() => this.logout()} className="nav-logo auth">Logout</Link>
                 </div>
             );
         } else {
             return (
-							<div className="auth-container">
-								<Link to="/auth/login" className="nav-logo auth">Login </Link>
-								<Link to="/auth/register" className="nav-logo auth">Register</Link>
-							</div>
-						);
+                <div className="auth-container">
+                    <Link to="/auth/login" className="nav-logo auth">Login </Link>
+                    <Link to="/auth/register" className="nav-logo auth">Register</Link>
+                </div>
+			);
         }
     }
 

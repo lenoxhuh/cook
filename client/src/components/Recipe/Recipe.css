@@ -457,3 +457,31 @@ a:visted {
   border: solid 1px #CCC;
   max-height: 300px;
 }
+
+.nutrient {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: #EEE;
+  display: inline-block;
+  margin-right: 40px;
+  margin-top: 20px;
+  text-align: center;
+  font-family: 'lekton';
+}
+
+.nutrient p {
+  font-weight: 600;
+}
+
+.num {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.num-desc {
+  position: relative;
+  top: 75%;
+  font-weight: 300 !important;
+}

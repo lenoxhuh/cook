@@ -40,7 +40,7 @@ app.post('/api/auth/login', function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.redirect(`/profile/${user._id}`);
+      return res.redirect("/");
     });
   })(req, res, next);
 });
@@ -55,44 +55,12 @@ app.post('/api/auth/register', (req, res) => {
   }), req.body.password, (err, user) => {
     if (err) res.send(err);
     passport.authenticate('local')(req, res, function () {
-      console.log("authenticated " + JSON.stringify(req.user));
-      res.status(200).redirect('/auth/login');
+      res.status(200).redirect('/');
     });
   });
 });
 
-// app.post('/api/auth/register', (req, res) => {
-//   User.findOne({}, {}, { sort: { 'id' : -1 } }).limit(1).exec((err, user) => {
-//     if (err)
-// 			res.redirect('/auth/register');
-//
-//     let id = 1;
-//     
-//     if (user && user['id']) {
-// 			console.log("\n\n Last user: " + user['id'] + "\n\n");
-//       id = user['id'] + 1;
-//     }
-//
-//     User.register(new User({ 
-//       username: req.body.username,
-//       name: req.body.name,
-//       country: req.body.country,
-//       description: req.body.description,
-// 			age: req.body.age,
-// 			school: req.body.school,
-//       id: id
-//     }), req.body.password, (err, user) => {
-// 			if (err) res.send(err);
-// 			passport.authenticate('local')(req, res, function () {
-// 				console.log("authenticated " + JSON.stringify(req.user));
-// 				res.status(200).redirect('/auth/login');
-// 			});
-// 	});
-//   });
-// });
-
 app.get('/api/auth/logout', function(req, res) {
-  console.log("logging out!");
   req.logout();
   res.redirect('/');
 });
@@ -110,7 +78,7 @@ app.post('/api/recipe', (req, res) => {
 	console.log("Received req " + JSON.stringify(body));
 	console.log("Received user " + JSON.stringify(user));
 
-  if (!user && !user.write) {
+  if (!user || !user.write) {
     res.redirect('/');
   }
 
@@ -121,7 +89,7 @@ app.post('/api/recipe', (req, res) => {
 	console.log("Received " + JSON.stringify(recipe));
 	recipe.save();
 
-  res.redirect('/');
+  res.status(200).redirect(`/recipes/${recipe._id}`);
 });
 
 app.get('/api/recipes', (req, res) => {

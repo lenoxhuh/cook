@@ -54,7 +54,8 @@ const categories = [
 "Tomato",
 "Tuna",
 "Vegetable",
-"Avocado"
+"Avocado",
+"Whey Protein"
 ]
 
 // IngestableHandler collects info from the db
@@ -608,6 +609,7 @@ class NewRecipe extends Component {
                 'Access-Control-Alllow-Origin': '*',
             },
             body: JSON.stringify(this.state.formValues),
+            redirect: 'follow'
         }).then(res => {
             console.log("RES: " + JSON.stringify(res));
         }).catch(err => {
@@ -615,7 +617,6 @@ class NewRecipe extends Component {
         });
 
         console.log("Submitted");
-        window.location.pathname="/";
     }
 
     getValid() {
@@ -685,12 +686,38 @@ class NewRecipe extends Component {
                         <p>Seperate by commas for more images (eg. link1,link2)</p>
                         <input id="photos" name="photos" type="text" onChange={this.handleChange.bind(this)} />
                     </div>
-
+                    
                     <div className="form-row">
 						<label htmlFor="recipe">Recipe</label>
                         <p>Seperate Instructions by Commas</p>
                         <input id="recipe" name="recipe" type="text" onChange={this.handleChange.bind(this)} />
 			    	</div>	
+
+                    <div className="form-row">
+						<label htmlFor="recipe">Calories</label>
+                        <p>Number of Calores</p>
+                        <input id="caloires" name="calories" type="text" onChange={this.handleChange.bind(this)} />
+			    	</div>	
+
+
+                    <div className="form-row">
+						<label htmlFor="recipe">Carbohydrates</label>
+                        <p>Grams of Carbohydrates</p>
+                        <input id="carbs" name="carbs" type="text" onChange={this.handleChange.bind(this)} />
+			    	</div>	
+
+                    <div className="form-row">
+						<label htmlFor="protein">Protein</label>
+                        <p>Grams of Protein</p>
+                        <input id="protein" name="protein" type="text" onChange={this.handleChange.bind(this)} />
+			    	</div>	
+                    
+                    <div className="form-row">
+						<label htmlFor="fat">Fat</label>
+                        <p>Grams of Fat</p>
+                        <input id="fat" name="fat" type="text" onChange={this.handleChange.bind(this)} />
+			    	</div>	
+
 
                     <div className="form-row">
 						<label htmlFor="tags">tags</label>
@@ -819,6 +846,7 @@ class IngredientsBanner extends Component {
         </div>
       );
     });
+
     return ingredients;
   }
 
@@ -956,7 +984,8 @@ class RecipePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipe: {}
+            recipe: {},
+            nutrients: ['calories', 'carbs', 'protein', 'fat']
         }
     }
 
@@ -982,6 +1011,24 @@ class RecipePage extends Component {
                 recipe: data.recipe[0]
             });
 		});
+    }
+
+    get_nutrients() {
+        let nutrients = [];
+        if (!this.state.recipe) {
+            return nutrients;
+        }
+        
+        this.state.nutrients.forEach(nutrient=> {
+            nutrients.push(
+            <div className="nutrient">
+                <p className="num" >{this.state.recipe[nutrient]}</p>
+                <p className="num-desc" >{nutrient}</p>
+            </div>
+            );
+        });
+    
+        return nutrients;
     }
 
     get_subheader() {
@@ -1015,6 +1062,10 @@ class RecipePage extends Component {
                         <p className="section-content">
                             <Directions directions={this.state.recipe.recipe} />
                         </p>
+                    </div>
+                    <div className="recipe-section">
+                        <p className="section-header">Nutritional Information</p>
+                        {this.get_nutrients()}
                     </div>
 
                 </div>
