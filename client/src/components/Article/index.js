@@ -18,22 +18,16 @@ class ArticleHandler extends Component {
     }
 
     get_url(props) {
-        if (props.id && props.country) {
-            // Country/ArticleID
-            return `/api/article/${props.country}/${props.id}`;
-        } else if (props.userId && props.country) {
-            // Country find matching userId
-            return `/api/article/${props.country}`;
-        }
+        if (props.id) {
+            return `/api/article/${props.id}`;
+        } 
     }
 
     get_article(props) {
         fetch(this.get_url(props))
         .then(data => data.json())
         .then(data => {
-            var mut = data.articles.filter((article) => {
-                return article.userId === props.userId;
-            });
+            var mut = data.articles;
             this.setState({
                 articles: mut
             });
@@ -155,181 +149,6 @@ class ArticleComments extends Component {
     }
 }
 
-// Article displays a full article
-class Article extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            article: null,
-            user: null,
-            updvoted: false,
-            curr: null
-        }
-    }
-
-    componentDidMount() {
-        this.get_article(this.props);
-    }
-
-    get_user(id) {
-       fetch(`/api/user/id/${id}`)
-       .then(data => data.json())
-       .then(data => {
-           this.setState({
-               user: data.user
-           });
-       });
-    }
-
-    get_curr() {
-        fetch('/api/user')
-        .then(data => data.json())
-        .then(data => {
-          let user = (data && data.user) ? data.user : null;
-          this.setState({
-            curr: user
-          });
-        });
-    }
-
-    get_url(props) {
-        return `/api/article/${props.country}/${props.id}`;
-    }
-
-    get_article(props) {
-        fetch(this.get_url(props))
-        .then(data => data.json())
-        .then(data => {
-            this.setState({
-                article: data.article,
-                upvotes: data.article.upvotes.length
-            }, () => {
-                this.get_user(data.article.userId);
-                this.get_curr();
-            });
-        });
-    }
-
-    get_profile() {
-        return `/${this.state.user.country}/profile/${this.state.user.id}`;
-    }
-
-    get_date() {
-        let created= new Date(this.state.article.created);
-        return created.toDateString();
-    }
-
-    get_video() {
-        if (this.state.article.video) {
-            return (
-                <div className="article-video-container">
-                    <ReactPlayer
-                    url={this.state.article.video}
-                    className={"article-video"}
-                    playing={false}
-                    width={"100%"}
-                    height={"400px"}
-                    config={{
-                        youtube: {
-                            playerVars: {
-                                modestbranding: 1,
-                            }
-                        }
-                    }}
-                    onError={e => e.target.style.display = 'none'}
-                    />
-                </div>
-            )
-        }
-    }
-
-    get_images() {
-        var images = [];
-        if (this.state.article.photos) {
-            const listed = this.state.article.photos.split(',');
-            listed.forEach((photo, i) => {
-                images.push(
-                    <img
-                        key={i}
-                        className="photos"
-                        src={photo}
-                        alt="."
-                        onError={e => e.target.style.display = 'none'}/>
-                );
-            });
-        }
-        return images;
-    }
-
-    upvote() {
-        if (!this.state.curr) {
-            return
-        }
-        var factor;
-        if (this.state.upvoted){
-            factor = -1;
-        } else {
-            factor = 1;
-        }
-
-
-        this.setState({
-            upvotes: this.state.upvotes + factor,
-            upvoted: !this.state.upvoted
-        });
-
-        var method = (factor > 0) ? "up" : "down";
-
-        fetch(`/api/article/${this.state.article.id}/${method}`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({user:this.state.curr.id})
-        });
-    }
-
-    render() {
-        if (this.state.article && this.state.user) {
-            return (
-                <div className="article-wrapper">
-                    <div className="article-cover">
-                        <img
-                            src={this.state.article.photo}
-                            alt="."
-                            onError={e => e.target.style.display = 'none'}>
-                        </img>
-                    </div>
-                    <div className="article-container">
-                        <h2>{this.state.article.title}</h2>
-                        <p>By <Link to={this.get_profile()}>{this.state.user.name}</Link></p>
-                        <p>{this.get_date()}</p>
-                        <p>
-                            {this.state.upvotes + " people "}
-                            <span className="upvote-link" onClick={() => this.upvote()}>like </span>
-                            this</p>
-                        <br />
-                        {this.get_images()}
-                        {this.get_video()}
-                        <p>{this.state.article.body}</p>
-                        <br/>
-                    </div>
-                    <ArticleComments
-                        articleId={this.state.article.id}
-                        comments={this.state.article.comments}
-                        />
-                </div>
-            );
-        } else {
-            return (
-                <div></div>
-            )
-        }
-    }
-}
-
 // ArticleCard displays article info
 class ArticleCard extends Component {
     constructor(props) {
@@ -353,7 +172,7 @@ class ArticleCard extends Component {
     }
 
     get_article() {
-        return `/article/${this.props.article.country}/${this.props.article.id}`;
+        return `/article/${this.props.article._id}`;
     }
 
     get_date() {
@@ -409,13 +228,7 @@ class ArticleCard extends Component {
                 <h2>
                     {this.props.article.title}
                     <br />
-                    <small>By {this.props.article.writer}, </small>
                     <small className="article-date">{this.get_date()}</small>
-                    <p className="custom-height">
-                        {this.state.upvotes + " people "}
-                        <span className="upvote-link" onClick={() => this.upvote()}>like </span>
-                        this
-                    </p>
                 </h2>
                 <p>{this.truncate_body()}</p>
                 <br/>
@@ -464,11 +277,10 @@ class NewArticle extends Component {
             title,
             photo,
             description,
-            country,
             body
         } = this.state.formValues;
 
-        if (title && photo && description && country && body) {
+        if (title && photo && description && body) {
             return "valid";
         } else {
             return "invalid";
@@ -498,19 +310,6 @@ class NewArticle extends Component {
                         <textarea id="description" name="description"  onChange={this.handleChange.bind(this)}></textarea>
                     </div>
 
-                    <div className="form-row select">
-                        <label htmlFor="country">Country</label>
-                        <select id="country" type="country" name="country" onChange={this.handleChange.bind(this)}>
-                            <option value="China">China</option>
-                            <option value="Colombia">Colombia</option>
-                            <option value="India">India</option>
-                            <option value="Sri Lanka">Sri Lanka</option>
-                            <option value="South Africa">South Africa</option>
-                            <option value="Dominican Republic">Dominican Republic</option>
-                            <option value="Research">Research</option>
-                        </select>
-                    </div>
-
                     <div className="form-row">
                         <label htmlFor="body">Body</label>
                         <textarea id="body" name="body"  onChange={this.handleChange.bind(this)}></textarea>
@@ -536,9 +335,192 @@ class NewArticle extends Component {
     }
 }
 
+class ArticleListPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            article: []
+        }
+        this.get_articles();
+    }
+
+    get_articles() {
+        fetch('/api/articles')
+        .then(data => data.json())
+        .then(data => {
+            this.setState({
+                articles: data.articles
+            });
+        });
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.get_articles();
+    }
+
+    get_cards() {
+        if (!this.state || !this.state.articles) {
+            return;
+        }
+        var cards = [];
+        this.state.articles.forEach((article) => {
+            cards.push(<ArticleCard article={article} key={article._id} />);
+        });
+        return cards;
+    }
+
+    render() {
+        const cards = this.get_cards();
+        return (
+            <div className="country-container">
+                <div className="country-articles">
+                    {cards}
+                </div>
+           </div>
+        );
+    }
+}
+
+// Article displays a full article
+class Article extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            article: null,
+            user: null,
+            updvoted: false,
+            curr: null
+        }
+    }
+
+    componentDidMount() {
+        this.get_article(this.props);
+    }
+
+    get_user(id) {
+       fetch(`/api/user/${id}`)
+       .then(data => data.json())
+       .then(data => {
+           this.setState({
+               user: data.user
+           });
+       });
+    }
+
+    get_curr() {
+        fetch('/api/user')
+        .then(data => data.json())
+        .then(data => {
+          let user = (data && data.user) ? data.user : null;
+          this.setState({
+            curr: user
+          });
+        });
+    }
+
+    get_url(props) {
+        return `/api/article/${props.id}`;
+    }
+
+    get_article(props) {
+        fetch(this.get_url(props))
+        .then(data => data.json())
+        .then(data => {
+            this.setState({
+                article: data.article,
+            }, () => {
+                this.get_user(data.article.userId);
+                this.get_curr();
+            });
+        });
+    }
+
+    get_date() {
+        let created= new Date(this.state.article.created);
+        return created.toDateString();
+    }
+
+    get_video() {
+        if (this.state.article.video) {
+            return (
+                <div className="article-video-container">
+                    <ReactPlayer
+                    url={this.state.article.video}
+                    className={"article-video"}
+                    playing={false}
+                    width={"100%"}
+                    height={"400px"}
+                    config={{
+                        youtube: {
+                            playerVars: {
+                                modestbranding: 1,
+                            }
+                        }
+                    }}
+                    onError={e => e.target.style.display = 'none'}
+                    />
+                </div>
+            )
+        }
+    }
+
+    get_images() {
+        var images = [];
+        if (this.state.article.photos) {
+            const listed = this.state.article.photos.split(',');
+            listed.forEach((photo, i) => {
+                images.push(
+                    <img
+                        key={i}
+                        className="photos"
+                        src={photo}
+                        alt="."
+                        onError={e => e.target.style.display = 'none'}/>
+                );
+            });
+        }
+        return images;
+    }
+
+    render() {
+        if (this.state.article) {
+            return (
+                <div className="article-wrapper">
+                    <div className="article-cover">
+                        <img
+                            src={this.state.article.photo}
+                            alt="."
+                            onError={e => e.target.style.display = 'none'}>
+                        </img>
+                    </div>
+                    <div className="article-container">
+                        <h2>{this.state.article.title}</h2>
+                        <p>{this.get_date()}</p>
+                        {this.get_images()}
+                        {this.get_video()}
+                        <p>{this.state.article.body}</p>
+                        <br/>
+                    </div>
+                    <ArticleComments
+                        articleId={this.state.article._id}
+                        comments={this.state.article.comments}
+                        />
+                </div>
+            );
+        } else {
+            return (
+                <div></div>
+            )
+        }
+    }
+}
+
 export {
     Article,
     ArticleCard,
     ArticleHandler,
+    ArticleListPage,
     NewArticle
 }

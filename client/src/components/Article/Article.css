@@ -310,9 +310,9 @@ form {
     height: 30px;
     background: white;
     overflow: hidden;
-  }
+}
 
-  .select select {
+.select select {
     font-size: 14px;
     border: none;
     box-shadow: none;
@@ -327,7 +327,11 @@ form {
     border: 1px solid #EEE;
     -moz-appearance: none;
     -webkit-appearance: none;
-  }
+}
+
+.country-container {
+    padding-top: 60px;
+}
 
   @media (max-width: 687px) {
       .card {

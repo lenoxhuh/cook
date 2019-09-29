@@ -10,7 +10,7 @@ const passport = require('passport')
 
 const port = process.env.PORT || 5000;
 
-var {Recipe, User} = require('./database');
+var {Recipe, User, Article} = require('./database');
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -133,28 +133,93 @@ app.get('/api/recipes/title/:title', (req, res) => {
   });
 });
 
-// app.post('/api/article/:id/up', (req, res) => {
-//   const body = req.body;
-//   const user = req.user;
-//
-//   if (!user) {
-//     res.redirect('/');
-//   }
-//
-//   Article.update(
-//     {id: req.params.id},
-//     { $push: {
-//       upvotes: [user.id]
-//     }},
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         console.log(result);
-//       }
-//     }
-//   );
-// });
+app.post('/api/article', (req, res) => {
+  const body = req.body;
+  const user = req.user;
+
+  if (!user) {
+    res.redirect('/');
+  }
+
+  body['userId'] = user._id;
+
+  let article = new Article(body);
+  console.log(JSON.stringify(article));
+  article.save();
+
+  res.status(200).redirect(`/articles/${article._id}`);
+});
+
+app.get('/api/articles', (req, res) => {
+  Article.find({}).exec((err, articles) => {
+    if (err) throw err;
+    res.send({
+      articles: articles
+    });
+  });
+});
+
+app.get('/api/article/:id', (req,res) => {
+  const body = req.body
+  Article.find({_id: req.params.id}).exec((err, article) => {
+    if (err) throw err;
+    
+    console.log(article);
+    res.send({
+      article: article[0]
+    });
+  });
+});
+
+app.post('/api/article/:id/up', (req, res) => {
+  const body = req.body;
+  const user = req.user;
+
+  if (!user) {
+    res.redirect('/');
+  }
+
+  Article.update(
+    {id: req.params.id},
+    { $push: {
+      upvotes: [user.id]
+    }},
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+    }
+  );
+});
+
+app.post('/api/article/:id/comment', (req, res) => {
+  const body = req.body;
+  const user = req.user;
+  if (!req.user) {
+    res.redirect('/auth/login');
+    return
+  }
+
+  Article.update(
+    {_id: req.params.id},
+    { $addToSet: {
+      comments: [{comment: body.comment, name: user.name, userId: user.id}]
+    }},
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+    }
+  );
+
+  res.redirect(req.get('referer'));
+
+});
+
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files

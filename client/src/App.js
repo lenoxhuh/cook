@@ -4,15 +4,11 @@ import update from 'react-addons-update';
 import './App.css';
 import Navbar from './components/Navbar/index';
 import Home from './components/Home/index';
-import { Article } from './components/Article/index';
+import { Article, NewArticle, ArticleHandler, ArticleListPage } from './components/Article/index';
 import { Recipe, NewRecipe, RecipePage, RecipeResults } from './components/Recipe/index';
 import About from './components/About/index';
 
 import { NewUser, LoginUser } from './components/Auth/index';
-
-// const User = ({ match }) => (
-//   <Profile userId={match.params.id} country={match.params.country} />
-// );
 
 const RecipeResultsQuery = ({ match }) => (
   <RecipeResults query={match.params.query} />
@@ -21,6 +17,10 @@ const RecipeResultsQuery = ({ match }) => (
 const RecipePageLoad = ({ match}) => (
   <RecipePage recipeid={match.params.id} />
 );
+
+const ArticlePage = ({ match }) => (
+  <Article id={match.params.id} />
+)
 
 class App extends Component {
   state = {
@@ -49,10 +49,12 @@ class App extends Component {
         <div>
           <Navbar />
           <Route exact path="/" component={Home} />
-          <Route exact path="/articles" component={Article} />
+          <Route exact path="/articles" component={ArticleListPage} />
           <Route exact path="/recipes" component={Recipe} />
           <Route exact path="/new/recipes" component={NewRecipe} />
+          <Route exact path="/new/articles" component={() => <NewArticle user={this.state.user}/>} />
           <Route exact path="/recipes/:id" component={RecipePageLoad} />
+          <Route exact path="/article/:id" component={ArticlePage} />
           <Route exact path="/about" component={About} />
           <Route exact path="/auth/login" component={LoginUser} />
           <Route exact path="/auth/register" component={NewUser} />

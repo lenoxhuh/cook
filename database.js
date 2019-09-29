@@ -62,6 +62,34 @@ let recipeSchema = new mongoose.Schema({
   fat: Number
 });
 
+let articleSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  created: {
+    type: Date,
+    default: Date.now
+  },
+	body: String,
+  photo: String,
+  photos: String,
+	video: String,
+  writer: String,
+  comments: [{
+    comment: String,
+    created: {
+      type: Date,
+      default: Date.now
+    },
+    name: String,
+    userId: String 
+  }],
+  upvotes: {
+    type: [Number], 
+		unique: false,
+		sparse: true
+  } 
+});
+
 let userSchema = new mongoose.Schema({
 	username: String,
 	name: String,
@@ -77,3 +105,4 @@ userSchema.plugin(passportLocalMongoose);
 module.exports = new Database()
 module.exports.Recipe = mongoose.model('Recipe', recipeSchema);
 module.exports.User = mongoose.model('User', userSchema);
+module.exports.Article = mongoose.model('Article', articleSchema);

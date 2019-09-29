@@ -729,7 +729,7 @@ class NewRecipe extends Component {
 						updateIng={(ingredients) => this.update_ingredients(ingredients)}/>	
 
                     <div className="form-row">
-                        <button 
+                        <button
 						    className={this.getValid()}
 							onClick={() => this.getValid() && this.handleSubmit()}
 						    >Submit</button>

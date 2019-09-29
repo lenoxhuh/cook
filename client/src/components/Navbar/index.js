@@ -64,7 +64,7 @@ class NavLogo extends Component {
 
     get_auth() {
         const create = (this.props.user && this.props.user.write) ?
-            (<Link to="/article/new" className="nav-logo auth">New Article</Link>) :
+            (<Link to="/new/articles" className="nav-logo auth">New Article</Link>) :
             (<div></div>);
 
         let new_recipes = (this.props.user && this.props.user.write) ? 
