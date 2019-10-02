@@ -485,3 +485,54 @@ a:visted {
   top: 75%;
   font-weight: 300 !important;
 }
+
+.twitter-profile {
+  width: 35%;
+  min-width: 200px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 50px;
+  position: relative;
+  top: -80px;
+  left: 40px;
+}
+
+.twitter-profile-desc {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  transform: translateY(10px);
+  width: 60%;
+  border-radius: 8px;
+  padding: 20px 20px; 
+  padding-left: 20px;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.twitter-profile p { 
+  margin: 0;
+  line-height: 1.2em;
+}
+
+.twitter-profile-header {
+  font-family: 'lekton';
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.twitter-profile-desc p {
+  mix-blend-mode: darken;
+}
+
+.twitter-profile-bg {
+  width: 100%;
+}
+
+.twitter-feed-wrapper {
+  width: 35%;
+  padding: 0 40px;
+  min-width: 200px;
+  display: inline-block;
+}

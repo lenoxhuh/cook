@@ -819,23 +819,32 @@ class TwitterFeed extends Component {
     return (
       <div className="twitter-wrapper">
         <p className="twitter-wrapper-side-header"> Twitter </p>
+        <div className="twitter-profile">
+            <img className="twitter-profile-bg" src="https://images.unsplash.com/photo-1543362906-acfc16c67564?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3101&q=80"></img>
+            <div className="twitter-profile-desc">
+                <p className="twitter-profile-header">@GainzHouse</p>
+                <br />
+                <p>Short description about what I do here.</p>
+            </div>
+        </div>
         <div classname="twitter-feed-wrapper" style={{
             "width": "35%",
             "padding": "0px 40px",
-            "min-width": "200px"
+            "min-width": "200px",
+            "display": "inline-block"
         }}>
-            <Timeline
-                dataSource={{
-                    sourceType: 'profile',
-                    screenName: 'GainzHouse'
-                }}
-                    options={{
-                    username: 'GainzHouse',
-                    height: '400'
-                }}
-                onLoad={() => console.log('Timeline is loaded!')}
-                />
-            </div>
+        <Timeline
+            dataSource={{
+                sourceType: 'profile',
+                screenName: 'GainzHouse'
+            }}
+                options={{
+                username: 'GainzHouse',
+                height: '400'
+            }}
+            onLoad={() => console.log('Timeline is loaded!')}
+            />
+        </div>
       </div>
     );
   }
