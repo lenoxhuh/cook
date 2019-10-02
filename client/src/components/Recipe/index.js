@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
+import { Timeline } from 'react-twitter-widgets';
 
 import './Recipe.css';
 
@@ -818,6 +819,23 @@ class TwitterFeed extends Component {
     return (
       <div className="twitter-wrapper">
         <p className="twitter-wrapper-side-header"> Twitter </p>
+        <div classname="twitter-feed-wrapper" style={{
+            "width": "35%",
+            "padding": "0px 40px",
+            "min-width": "200px"
+        }}>
+            <Timeline
+                dataSource={{
+                    sourceType: 'profile',
+                    screenName: 'GainzHouse'
+                }}
+                    options={{
+                    username: 'GainzHouse',
+                    height: '400'
+                }}
+                onLoad={() => console.log('Timeline is loaded!')}
+                />
+            </div>
       </div>
     );
   }

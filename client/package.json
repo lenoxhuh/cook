@@ -11,6 +11,8 @@
     "react-scripts": "1.1.4",
     "react-scroll-horizontal": "^1.5.1",
     "react-text-loop": "^1.1.0",
+    "react-twitter-embed": "^2.0.8",
+    "react-twitter-widgets": "^1.7.1",
     "victory": "^33.0.1"
   },
   "scripts": {
