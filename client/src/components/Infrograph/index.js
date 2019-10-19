@@ -19,15 +19,14 @@ class Infrograph extends Component {
     return (
       <div className="infrograph">
         <div className="infrographic-wrapper">
-          <h1 className="text-shadow underline"> Millions of Americans are diagnosed as diabetic each year</h1>
+          <h1 className="text-shadow underline"> In the United States alone, nearly one in five children between the ages of 6 to 19 are obese, and one in three are overweight. </h1>
           <div className="desc-wrapper">
             <p className="abstract"><i>abstract</i></p>
-            <p> The DRIF is focused on finding a way to beat diabetes & improve millions of lives. Relentless research and testing is our only focus. 
-          See how you can help today! The Best Hope for a Cure. Help Managing Diabetes. Research Updates & News. Be a Hero - Donate Now. Solely Focused on a Cure. </p>
+            <p>In 2010, Michelle Obama started the Let’s Move! Initiative to combat child obesity through active lifestyle and healthy eating through community involvement. House of Gainz was created to become an online platform to help with this cause in educating the youth about fitness, healthy eating, and nutrition.</p>
           </div>
           <Button
-            title="Read More"
-            width="100px"
+            title="Getting Started"
+            width="150px"
             />
         </div>
         <div className="infromodules-wrapper">

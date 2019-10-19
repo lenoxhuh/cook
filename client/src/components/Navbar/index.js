@@ -34,7 +34,7 @@ class Navbar extends Component {
 	  <div className="navbar-container">
         <NavLogo
             user={this.state.user}
-            title={"Foodfly"}
+            title={"House of Gainz"}
             rerender={() => {
                 this.setState({user: {}})
             }}
