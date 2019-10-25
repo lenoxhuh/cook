@@ -21,12 +21,12 @@ class Infrograph extends Component {
         <div className="infrographic-wrapper">
           <h1 className="text-shadow underline"> In the United States alone, nearly one in five children between the ages of 6 to 19 are obese, and one in three are overweight. </h1>
           <div className="desc-wrapper">
-            <p className="abstract"><i>abstract</i></p>
             <p>In 2010, Michelle Obama started the Let’s Move! Initiative to combat child obesity through active lifestyle and healthy eating through community involvement. House of Gainz was created to become an online platform to help with this cause in educating the youth about fitness, healthy eating, and nutrition.</p>
           </div>
           <Button
             title="Getting Started"
             width="150px"
+            onClick={() => window.location = "/about"}
             />
         </div>
         <div className="infromodules-wrapper">

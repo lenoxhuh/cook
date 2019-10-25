@@ -13,6 +13,7 @@ class Button extends Component {
     render() {
         return (
           <div 
+            onClick={() => this.props.onClick()}
             className="button-wrapper" 
             style={{
               width: this.props.width

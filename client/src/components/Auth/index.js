@@ -115,12 +115,6 @@ class NewUser extends Component {
                     </div>
 
                     <div className="form-row">
-                        <label htmlFor="description">Bio</label>
-                        <br />
-                        <textarea id="description" name="description"  onChange={this.handleChange.bind(this)}></textarea>
-                    </div>
-
-                    <div className="form-row">
                         <label htmlFor="password">Password</label>
                         <br />
                         <input id="password" name="password" type="password" onChange={this.handleChange.bind(this)} />

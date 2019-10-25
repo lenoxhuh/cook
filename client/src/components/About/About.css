@@ -21,7 +21,7 @@ h2 {
 	width: 500px;
 	height: auto;
 	position: relative;
-	top: 50%;
+	top: 75%;
 	transform: translateY(-50%);
 
 }
