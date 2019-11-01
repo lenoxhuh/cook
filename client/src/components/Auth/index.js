@@ -76,12 +76,11 @@ class NewUser extends Component {
         let {
             username,
             name,
-            description,
             password,
             verify_password,
         } = this.state.formValues;
 
-        if (username && name && description && password && password === verify_password) {
+        if (username && name && password && password === verify_password) {
             console.log("valid");
             return "valid";
         } else {
